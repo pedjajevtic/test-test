@@ -27,6 +27,18 @@
                 if (uniqueCodeElement) {
                     uniqueCodeElement.textContent = `unesi ovaj jedinstveni kod ${id}`;
                 }
+
+		    // Prikazi listu u og:description
+                var listItems = document.querySelectorAll('ul li');
+                var description = "Sve što treba da uradite:\n";
+                listItems.forEach(function (item) {
+                    description += ` - ${item.textContent}\n`;
+                });
+
+                var ogDescriptionElement = document.querySelector('meta[property="og:description"]');
+                if (ogDescriptionElement) {
+                    ogDescriptionElement.setAttribute('content', description);
+                }
             }
         });
     </script>
