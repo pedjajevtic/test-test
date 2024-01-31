@@ -21,24 +21,63 @@
             }
         });
     </script>
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0 10%;
+            background: linear-gradient(25deg, rgba(82, 174, 48, 1) 0%, rgba(255, 255, 255, 1) 65%);
+            font-family: 'Source-Sans-Pro', sans-serif;
+        }
+
+        p {
+            margin-top: 80px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .app-links {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 20px;
+            flex-direction: row;
+            max-width: 100%;
+        }
+
+        .app-link {
+            width: 45%;
+        }
+    </style>
 </head>
 
-<body style="padding: 0; margin: 0 10%; background: linear-gradient(25deg, rgba(82,174,48,1) 0%, rgba(255,255,255,1) 65%);">
-    <p style="font-family: 'Source-Sans-Pro', sans-serif; margin-top: 80px;">Postani i ti klijent OTP banke! Koristeći moj kod, dobijaš i do 12 meseci besplatnog održavanja računa.</p>
-    <ul style="font-family: 'Source-Sans-Pro', sans-serif;">
+<body>
+    <p>Postani i ti klijent OTP banke! Koristeći moj kod, dobijaš i do 12 meseci besplatnog održavanja računa.</p>
+    <ul>
         <li>preuzmi OTP m-Bank aplikaciju</li>
         <li>izaberi opciju <span style="font-style: italic">Postani klijent</span></li>
         <li id="unique-code">unesi ovaj jedinstveni kod </li>
-	<li>uživaj u 12 meseci besplatnog održavanja računa</li>
+        <li>uživaj u 12 meseci besplatnog održavanja računa</li>
     </ul>
-    <img style="width: 100%;" src="https://i.imgur.com/TdN3DVd.png">
-    <div style="display: flex; align-items: center; width: 100%; justify-content: space-between; margin-top: 20px; gap: 20px; flex-direction: column;">
-        <a href="https://www.google.com" target="_blank" style="width: 45%;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/800px-Google_Play_Store_badge_EN.svg.png" alt="Google Play Store" style="width: 100%;">
+    <img src="https://i.imgur.com/TdN3DVd.png" alt="Mobile App Screenshot">
+    <div class="app-links">
+        <a href="https://www.google.com" target="_blank" class="app-link">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/800px-Google_Play_Store_badge_EN.svg.png" alt="Google Play Store">
         </a>
-
-        <a href="https://www.google.com" target="_blank" style="width: 45%;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/800px-Download_on_the_App_Store_Badge.svg.png" alt="App Store" style="width: 100%;">
+        <a href="https://www.google.com" target="_blank" class="app-link">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/800px-Download_on_the_App_Store_Badge.svg.png" alt="App Store">
         </a>
     </div>
 </body>
