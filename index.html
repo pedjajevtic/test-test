@@ -16,7 +16,7 @@
             if (id) {
                 var uniqueCodeElement = document.getElementById('unique-code');
                 if (uniqueCodeElement) {
-                    uniqueCodeElement.textContent = `unesi ovaj jedinstveni kod ${id}`;
+                    uniqueCodeElement.textContent = `unesi ovaj jedinstveni kod: <span style="font-weight: bold;">${id}</span>`;
                 }
             }
         });
@@ -83,7 +83,7 @@
     <ul>
         <li>preuzmi OTP m-Bank aplikaciju</li>
         <li>izaberi opciju <span style="font-style: italic;">Postani klijent</span></li>
-        <li id="unique-code">unesi ovaj jedinstveni kod </li>
+        <li id="unique-code">unesi ovaj jedinstveni kod: </li>
         <li>uživaj u 12 meseci besplatnog održavanja računa</li>
     </ul>
     <img src="https://i.imgur.com/TdN3DVd.png">
