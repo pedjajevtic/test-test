@@ -9,5 +9,34 @@
     <meta property="og:image" content="https://i.imgur.com/2Et0ihL.png" />
 
     <meta property="ia:markup_url" content="https://www.otpbanka.rs/stanovnistvo/m-bank/" />
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var urlParams = new URLSearchParams(window.location.search);
+            var id = urlParams.get('id');
+
+            if (id) {
+                var uniqueCodeElement = document.getElementById('unique-code');
+                if (uniqueCodeElement) {
+                    uniqueCodeElement.textContent = `unesi ovaj jedinstveni kod ${id}`;
+                }
+            }
+        });
+    </script>
 </head>
+
+<body>
+    <p style="font-family: 'Source-Sans-Pro', sans-serif">Postani i ti klijent OTP banke! Koristeći moj kod, dobijaš i do 12 meseci besplatnog održavanja računa.</p>
+    <ul style="font-family: 'Source-Sans-Pro', sans-serif">
+        <li>preuzmi OTP m-bank aplikaciju</li>
+        <li>izaberi opciju <span style="font-style: italic">Postani klijent</span></li>
+        <li id="unique-code">unesi ovaj jedinstveni kod </li>
+	<li>uživaj u 12 meseci besplatnog održavanja računa</li>
+    </ul>
+    <img src="https://i0.wp.com/pcpress.rs/wp-content/uploads/2022/09/otp1.png">
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/800px-Google_Play_Store_badge_EN.svg.png">
+	<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/800px-Download_on_the_App_Store_Badge.svg.png">	
+    </div>
+</body>
 </html>
