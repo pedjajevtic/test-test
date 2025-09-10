@@ -7,30 +7,6 @@
     <meta property="og:title" content="Postani i ti klijent OTP banke! Koristeći moj kod, dobijaš i do 12 meseci besplatnog održavanja računa." />
     <meta property="og:description" content="Preuzmite m-Bank aplikaciju OTP banke" />
     <meta property="og:image" content="https://www.otpbanka.rs/wp-content/uploads/2024/01/image.png" />
-	
-    <script>
-    //const params = new URLSearchParams(window.location.search);
-    const deeplink = "https://www.google.com";
-
-    function isInAppBrowser() {
-      const ua = navigator.userAgent || "";
-      return ua.includes("FBAN") || ua.includes("FBAV") || ua.includes("FB_IAB") || ua.includes("Instagram");
-    }
-
-    if (isInAppBrowser()) {
-      document.getElementById("openAppBtn").addEventListener("click", () => {
-        if (/Android/i.test(navigator.userAgent)) {
-          //window.location.href = `intent://${deeplink.replace(/^.*?:\/\//, '')}#Intent;scheme=${deeplink.split('://')[0]};package=com.tvoja.app;end;`;
-			window.location.href = deeplink;
-        } else {
-          window.location.href = deeplink;
-        }
-      });
-    } else {
-      // 4. Ako NIJE in-app browser -> odmah pusti deeplink
-      window.location.href = deeplink;
-    }
-    </script>
 
     <style>
         body {
@@ -114,8 +90,33 @@
     <div class="app-links">
         <a id="openAppBtn" target="_blank" class="app-link">KLIK</a>
     </div>
+
+	<script>
+    //const params = new URLSearchParams(window.location.search);
+    const deeplink = "https://www.google.com";
+
+    function isInAppBrowser() {
+      const ua = navigator.userAgent || "";
+      return ua.includes("FBAN") || ua.includes("FBAV") || ua.includes("FB_IAB") || ua.includes("Instagram");
+    }
+
+    if (isInAppBrowser()) {
+      document.getElementById("openAppBtn").addEventListener("click", () => {
+        if (/Android/i.test(navigator.userAgent)) {
+          //window.location.href = `intent://${deeplink.replace(/^.*?:\/\//, '')}#Intent;scheme=${deeplink.split('://')[0]};package=com.tvoja.app;end;`;
+			window.location.href = deeplink;
+        } else {
+          window.location.href = deeplink;
+        }
+      });
+    } else {
+      // 4. Ako NIJE in-app browser -> odmah pusti deeplink
+      window.location.href = deeplink;
+    }
+    </script>
 </body>
 </html>
+
 
 
 
