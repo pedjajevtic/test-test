@@ -92,28 +92,31 @@
     </div>
 
 	<script>
-    const deeplink = "https://www.google.com";
+  // Umesto Google stavljamo pravi deeplink
+  const deeplink = "https://ebank.otpbanka.rs/mobileTarget/?data=ewogICJUYXJnZXQiOiJEQi5PdmQiCn0KCgo=?utm_source=mbank&utm_medium=deeplink&utm_campaign=os_kampanja_202505&utm_content=overdraft&utm_term=&utm_id=12345&crmc=**********************************&crm_campaign=****************************************************";
 
-    function isInAppBrowser() {
-      const ua = navigator.userAgent || "";
-      return ua.includes("FBAN") || ua.includes("FBAV") || ua.includes("FB_IAB") || ua.includes("Instagram");
-    }
+  function isInAppBrowser() {
+    const ua = navigator.userAgent || "";
+    return ua.includes("FBAN") || ua.includes("FBAV") || ua.includes("FB_IAB") || ua.includes("Instagram");
+  }
 
-    const btn = document.getElementById("openAppBtn");
+  const btn = document.getElementById("openAppBtn");
 
-    if (isInAppBrowser()) {
-      // Ako je u in-app browseru, prikaži dugme
-      btn.style.display = "inline-block";
-      btn.addEventListener("click", () => {
-        window.open(deeplink, "_blank");
-      });
-    } else {
-      // Ako NIJE in-app browser → odmah otvori link
+  if (isInAppBrowser()) {
+    // Ako je u in-app browseru, prikaži dugme
+    btn.style.display = "inline-block";
+    btn.addEventListener("click", () => {
       window.location.href = deeplink;
-    }
-  </script>
+    });
+  } else {
+    // Ako NIJE in-app browser → odmah otvori deeplink
+    window.location.href = deeplink;
+  }
+</script>
+
 </body>
 </html>
+
 
 
 
