@@ -9,30 +9,20 @@
     <meta property="og:image" content="https://www.otpbanka.rs/wp-content/uploads/2024/01/image.png" />
 	
     <script>
-    // 1. Izvuci deeplink iz query parametra
     //const params = new URLSearchParams(window.location.search);
-    const deeplink = "www.google.com";
+    const deeplink = "https://www.google.com";
 
-    // fallback ako nema parametra
-    if (!deeplink) {
-      document.body.innerHTML = "<p>Greška: nedostaje deeplink parametar.</p>";
-    }
-
-    // 2. Funkcija koja proverava da li smo u in-app browseru
     function isInAppBrowser() {
       const ua = navigator.userAgent || "";
       return ua.includes("FBAN") || ua.includes("FBAV") || ua.includes("FB_IAB") || ua.includes("Instagram");
     }
 
-    // 3. Ako je in-app browser -> prikaži dugme
     if (isInAppBrowser()) {
-      document.getElementById("openAppBtn").style.display = "inline-block";
       document.getElementById("openAppBtn").addEventListener("click", () => {
         if (/Android/i.test(navigator.userAgent)) {
-          // Android: koristi intent:// da otvori u Chrome i onda app
-          window.location.href = `intent://${deeplink.replace(/^.*?:\/\//, '')}#Intent;scheme=${deeplink.split('://')[0]};package=com.tvoja.app;end;`;
+          //window.location.href = `intent://${deeplink.replace(/^.*?:\/\//, '')}#Intent;scheme=${deeplink.split('://')[0]};package=com.tvoja.app;end;`;
+			window.location.href = deeplink;
         } else {
-          // iOS: direktno pusti deeplink, Safari će ga uhvatiti
           window.location.href = deeplink;
         }
       });
@@ -122,9 +112,10 @@
     </div>
 	<p>Neki tekst.......</p>
     <div class="app-links">
-        <a href="https://onelink.to/83emz6" target="_blank" class="app-link">Preuzmi</a>
+        <a id="openAppBtn" target="_blank" class="app-link">KLIK</a>
     </div>
 </body>
 </html>
+
 
 
