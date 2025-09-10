@@ -92,7 +92,6 @@
     </div>
 
 	<script>
-    //const params = new URLSearchParams(window.location.search);
     const deeplink = "https://www.google.com";
 
     function isInAppBrowser() {
@@ -100,22 +99,22 @@
       return ua.includes("FBAN") || ua.includes("FBAV") || ua.includes("FB_IAB") || ua.includes("Instagram");
     }
 
+    const btn = document.getElementById("openAppBtn");
+
     if (isInAppBrowser()) {
-      document.getElementById("openAppBtn").addEventListener("click", () => {
-        if (/Android/i.test(navigator.userAgent)) {
-          //window.location.href = `intent://${deeplink.replace(/^.*?:\/\//, '')}#Intent;scheme=${deeplink.split('://')[0]};package=com.tvoja.app;end;`;
-			window.location.href = deeplink;
-        } else {
-          window.location.href = deeplink;
-        }
+      // Ako je u in-app browseru, prikaži dugme
+      btn.style.display = "inline-block";
+      btn.addEventListener("click", () => {
+        window.open(deeplink, "_blank");
       });
     } else {
-      // 4. Ako NIJE in-app browser -> odmah pusti deeplink
+      // Ako NIJE in-app browser → odmah otvori link
       window.location.href = deeplink;
     }
-    </script>
+  </script>
 </body>
 </html>
+
 
 
 
