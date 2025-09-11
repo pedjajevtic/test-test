@@ -88,8 +88,10 @@
     </div>
 
 	<script>
-  // Umesto Google stavljamo pravi deeplink
   const deeplink = "https://ebank.otpbanka.rs/mobileTarget/?data=ewogICJUYXJnZXQiOiJEQi5tS2VzIgp9&utm_source=Facebook&utm_medium=Traffic&utm_campaign=Deeplink_mCash_Online_sales_202508&utm_content=120232029472500056%2F%2FOS_FB_LG_customer-list_kes-kredit_092025-01163&utm_term=120232029472510056%2F%2FInstagram_Feed%2F%2F7.5%25EKS_Mbank&utm_id=&crmc=4c3dea17-5372-733a-b283-685cf056bdc3&crm_campaign=CCC_IND_ONLINE_SALES_MBANK_DEEPLINK_RTDE_SLS_062025_P&fbclid=PAb21jcAMswAdleHRuA2FlbQEwAGFkaWQBqyZlQyT9GAGn4GZe1fiqsLyzQofJBEKJ8lgiNETSdLpd_O9V63kGW54yr_clXnwGQ_04KtE_aem_mEnwGhWOMGB5752cRx_zlg";
+
+  // ako app ne otvori, odvedi korisnika na fallback (npr. web login ili store)
+  const fallbackUrl = "https://ebank.otpbanka.rs/mobileTarget";
 
   function isInAppBrowser() {
     const ua = navigator.userAgent || "";
@@ -99,19 +101,26 @@
   const btn = document.getElementById("openAppBtn");
 
   if (isInAppBrowser()) {
-    // Ako je u in-app browseru, prikaži dugme
+    // U in-app browseru → samo dugme
     btn.style.display = "inline-block";
     btn.addEventListener("click", () => {
       window.location.href = deeplink;
     });
   } else {
-    // Ako NIJE in-app browser → odmah otvori deeplink
+    // Van in-app browsera → probaj otvoriti app
     window.location.href = deeplink;
+
+    // Ako app nije reagovao u 2s, preusmeri na fallback
+    setTimeout(() => {
+      window.location.href = fallbackUrl;
+    }, 2000);
   }
 </script>
 
+
 </body>
 </html>
+
 
 
 
