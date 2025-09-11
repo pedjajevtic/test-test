@@ -87,55 +87,30 @@
         <a id="openAppBtn" target="_blank" class="app-link">KLIK</a>
     </div>
 
-  <a id="hiddenDeeplink"
-     href="https://ebank.otpbanka.rs/mobileTarget/?data=ewogICJUYXJnZXQiOiJEQi5tS2VzIgp9&utm_source=Facebook&utm_medium=Traffic&utm_campaign=Deeplink_mCash_Online_sales_202508&utm_content=120232029472500056%2F%2FOS_FB_LG_customer-list_kes-kredit_092025-01163&utm_term=120232029472510056%2F%2FInstagram_Feed%2F%2F7.5%25EKS_Mbank&utm_id=&crmc=4c3dea17-5372-733a-b283-685cf056bdc3&crm_campaign=CCC_IND_ONLINE_SALES_MBANK_DEEPLINK_RTDE_SLS_062025_P&fbclid=PAb21jcAMswAdleHRuA2FlbQEwAGFkaWQBqyZlQyT9GAGn4GZe1fiqsLyzQofJBEKJ8lgiNETSdLpd_O9V63kGW54yr_clXnwGQ_04KtE_aem_mEnwGhWOMGB5752cRx_zlg">
-  </a>
-
 	<script>
-  const btn = document.getElementById("openAppBtn");
-  const deeplink = document.getElementById("hiddenDeeplink");
-  const fallbackUrl = "https://www.otpbanka.rs/mobileTarget";
+  const deeplink = "https://ebank.otpbanka.rs/mobileTarget/?data=ewogICJUYXJnZXQiOiJEQi5tS2VzIgp9&utm_source=Facebook&utm_medium=Traffic&utm_campaign=Deeplink_mCash_Online_sales_202508&utm_content=120232029472500056%2F%2FOS_FB_LG_customer-list_kes-kredit_092025-01163&utm_term=120232029472510056%2F%2FInstagram_Feed%2F%2F7.5%25EKS_Mbank&utm_id=&crmc=4c3dea17-5372-733a-b283-685cf056bdc3&crm_campaign=CCC_IND_ONLINE_SALES_MBANK_DEEPLINK_RTDE_SLS_062025_P&fbclid=PAb21jcAMswAdleHRuA2FlbQEwAGFkaWQBqyZlQyT9GAGn4GZe1fiqsLyzQofJBEKJ8lgiNETSdLpd_O9V63kGW54yr_clXnwGQ_04KtE_aem_mEnwGhWOMGB5752cRx_zlg";
 
   function isInAppBrowser() {
     const ua = navigator.userAgent || "";
     return ua.includes("FBAN") || ua.includes("FBAV") || ua.includes("FB_IAB") || ua.includes("Instagram");
   }
 
-  function tryOpenDeeplink() {
-    let fallbackTimer = setTimeout(() => {
-      window.location.href = fallbackUrl;
-    }, 2000);
-
-    // Ako korisnik ode iz stranice (jer se app otvorila), stopiraj fallback
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) {
-        clearTimeout(fallbackTimer);
-      }
-    });
-
-    // iOS voli pravi user-gesture (click), pa simulacija klik ne prolazi uvek
-    // Zato je bolje ovde pozvati .click() SAMO iz handlera dugmeta
-    deeplink.click();
-  }
+  const btn = document.getElementById("openAppBtn");
 
   if (isInAppBrowser()) {
-    // Ako je u in-app browseru → prikaži dugme
+    // Ako je u in-app browseru, prikaži dugme
     btn.style.display = "inline-block";
-    btn.addEventListener("click", tryOpenDeeplink);
-  } else {
-    // Ako NIJE u in-app browser → odmah probaj
-    tryOpenDeeplink();
-  }
+    btn.addEventListener("click", () => {
+      window.location.href = deeplink;
+    });
+  } 
+  //else {
+  //  window.location.href = deeplink;
+  //}
 </script>
-
 
 </body>
 </html>
-
-
-
-
-
 
 
 
