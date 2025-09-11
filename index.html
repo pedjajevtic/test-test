@@ -92,33 +92,46 @@
   </a>
 
 	<script>
-    const btn = document.getElementById("openAppBtn");
-    const deeplink = document.getElementById("hiddenDeeplink");
+  const btn = document.getElementById("openAppBtn");
+  const deeplink = document.getElementById("hiddenDeeplink");
+  const fallbackUrl = "https://www.otpbanka.rs/mobileTarget";
 
-    function isInAppBrowser() {
-      const ua = navigator.userAgent || "";
-      return ua.includes("FBAN") || ua.includes("FBAV") || ua.includes("FB_IAB") || ua.includes("Instagram");
-    }
+  function isInAppBrowser() {
+    const ua = navigator.userAgent || "";
+    return ua.includes("FBAN") || ua.includes("FBAV") || ua.includes("FB_IAB") || ua.includes("Instagram");
+  }
 
-    if (isInAppBrowser()) {
-      // Ako je u in-app browseru → prikaži dugme
-      btn.style.display = "inline-block";
-      btn.addEventListener("click", () => {
-        deeplink.click(); // simulacija pravog klika
-      });
-    } else {
-      // Ako NIJE in-app browser → odmah probaj otvoriti aplikaciju
-      deeplink.click();
+  function tryOpenDeeplink() {
+    let fallbackTimer = setTimeout(() => {
+      window.location.href = fallbackUrl;
+    }, 2000);
 
-      // Ako app nije instalirana → fallback posle 2s
-      setTimeout(() => {
-        window.location.href = "https://www.otpbanka.rs/mobileTarget";
-      }, 2000);
-    }
-  </script>
+    // Ako korisnik ode iz stranice (jer se app otvorila), stopiraj fallback
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        clearTimeout(fallbackTimer);
+      }
+    });
+
+    // iOS voli pravi user-gesture (click), pa simulacija klik ne prolazi uvek
+    // Zato je bolje ovde pozvati .click() SAMO iz handlera dugmeta
+    deeplink.click();
+  }
+
+  if (isInAppBrowser()) {
+    // Ako je u in-app browseru → prikaži dugme
+    btn.style.display = "inline-block";
+    btn.addEventListener("click", tryOpenDeeplink);
+  } else {
+    // Ako NIJE u in-app browser → odmah probaj
+    tryOpenDeeplink();
+  }
+</script>
+
 
 </body>
 </html>
+
 
 
 
