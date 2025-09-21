@@ -132,7 +132,8 @@
     }
 
     function isInAppBrowser() {
-      return /(FBAN|FBAV|Instagram|Line)/i.test(navigator.userAgent);
+      const ua = navigator.userAgent.toLowerCase();
+      return ua.includes("fban") || ua.includes("fbav") || ua.includes("fb_iab") || ua.includes("instagram");
     }
 
     function openDeeplinkWithFallback() {
@@ -174,4 +175,5 @@
   </script>
 </body>
 </html>
+
 
