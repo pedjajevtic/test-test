@@ -1,164 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            padding: 0;
-            margin: 0 10%;
-            background: linear-gradient(25deg, rgba(82, 174, 48, 1) 0%, rgba(255, 255, 255, 1) 65%);
-            background-attachment: fixed;
-            font-family: 'Source-Sans-Pro', sans-serif;
-        }
+  <style>
+    body {
+      padding: 0;
+      margin: 0 10%;
+      font-family: 'Source-Sans-Pro', sans-serif;
+      height: calc(100vh - 30px);
+      position: relative;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("https://i.imgur.com/sRnDCOs.jpeg") center no-repeat;
+      overflow: hidden;
+    }
 
-        p {
-            font-weight: bold;
-        }
+    .header-wrapper {
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 30px 0px 50px 0px;
+    }
 
-        .img-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    .otp-promo-img {
+      width: 45%;
+    }
 
-        .img-wrapper img {
-            width: 100%;
-            max-width: 800px;
-            border-radius: 25px;
-        }
+    /* LANDING placeholder (kasnije ćemo srediti) */
+    #landing {
+      display: none;
+      text-align: center;
+      padding: 50px 20px;
+      color: #fff;
+    }
 
-        .app-links {
-            display: flex;
-            align-items: center;
-            margin-top: 20px;
-            gap: 20px;
-            flex-direction: column;
-        }
+    /* FALLBACK */
+    #fallback {
+      display: none;
+    }
 
-        .header-wrapper {
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 20px 0px 50px 0px; 
-        }
+    .blur-wrapper {
+      text-align: center;
+      background-color: rgba(0, 0, 0, .4);
+      backdrop-filter: blur(5px);
+      padding: 20px 25px;
+      border-radius: 20px;
+      color: #FFFFFF;
+      transform: translate(0, -50%);
+      top: 50%;
+      position: absolute;
+    }
 
-        .otp-promo-img {
-            width: 30%;
-        }
+    .blur-wrapper-top {
+      font-size: 35px;
+      font-weight: 600;
+      margin-top: 15px;
+      margin-bottom: -5px;
+    }
 
-        .otp-promo-text {
-            margin-left: 7px;
-            padding-left: 7px;
-            border-left: 3px solid #2A7F00;
-            color: #2A7F00;
-            font-weight: bold;
-            font-size: 20px;
-        }
+    .blur-wrapper-bottom {
+      letter-spacing: 0.5px;
+      line-height: 1.35;
+      font-size: 16px;
+    }
 
-        .app-link {
-            width: 45%;
-            padding: 14px 45px;
-            margin: 20px 0px;
-            background-color: #52AE30;
-            border-radius: 25px;
-            text-align: center;
-            color: #FFFFFF;
-            text-decoration: none !important;
-            font-weight: 600;
-            transition: all .5s;
-        }
-
-        .app-link:hover {
-            background-color: #2A7F00;
-        }
-    </style>
+    .app-link {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+      flex-direction: column;
+      position: absolute;
+      bottom: 90px;
+      width: 85%;
+      padding: 14px 25px;
+      background-color: #52AE30;
+      border-radius: 25px;
+      text-align: center;
+      color: #FFFFFF;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none !important;
+    }
+  </style>
 </head>
 
 <body>
-<!-- izmena landing stranice -->
-<div id="landingContent" style="display:none;">
-  <p>Neki tekst.......</p>
-  <div class="app-links">
-    <a id="openAppBtn" target="_blank" class="app-link">Otvori aplikaciju</a>
+  <div class="header-wrapper">
+    <img class="otp-promo-img" src="https://i.imgur.com/Vq45WRe.png">
   </div>
-</div>
+
+  <!-- LANDING -->
+  <div id="landingContent" style="display:none;">
+    <p>Neki tekst.......</p>
+    <div class="app-links">
+      <a id="openAppBtn" target="_blank" class="app-link">Otvori aplikaciju</a>
+    </div>
+  </div>
     
-<!-- izmena fallback stranice -->
-<div id="fallbackContent" style="display:none; text-align:center;">
-  <p>Niste instalirali aplikaciju?</p>
-  <a href="https://www.otpbanka.rs/mobileTarget" class="app-link">Nastavi na web verziju</a>
-</div>
+  <!-- FALLBACK -->
+  <div id="fallback">
+    <div class="blur-wrapper">
+      <p class="blur-wrapper-top">Hmmm...</p>
+      <p class="blur-wrapper-bottom">
+        Izgleda da nemate instaliranu mBank aplikaciju OTP banke. Preuzmite je sada i iskoristite sve pogodnosti digitalnog bankarstva.
+      </p>
+    </div>
+    <a class="app-link" id="app-link" href="#">Preuzmi ovde</a>
+  </div>
 
-<!-- IZMENA DEEPLINKA -->
-<a id="hiddenDeeplink" 
-   href="https://ebank.otpbanka.rs/mobileTarget/?data=ewogICJUYXJnZXQiOiJEQi5tS2VzIgp9&utm_source=Facebook&utm_medium=Traffic&utm_campaign=Deeplink_mCash_Online_sales_202508&utm_content=120232029472500056%2F%2FOS_FB_LG_customer-list_kes-kredit_092025-01163&utm_term=120232029472510056%2F%2FInstagram_Feed%2F%2F7.5%25EKS_Mbank&utm_id=&crmc=4c3dea17-5372-733a-b283-685cf056bdc3&crm_campaign=CCC_IND_ONLINE_SALES_MBANK_DEEPLINK_RTDE_SLS_062025_P&fbclid=PAb21jcAMswAdleHRuA2FlbQEwAGFkaWQBqyZlQyT9GAGn4GZe1fiqsLyzQofJBEKJ8lgiNETSdLpd_O9V63kGW54yr_clXnwGQ_04KtE_aem_mEnwGhWOMGB5752cRx_zlg">
-</a>
+  <script>
+    const landing = document.getElementById("landing");
+    const fallback = document.getElementById("fallback");
+    const btn = document.getElementById("app-link");
 
-<script>
-  const btn = document.getElementById("openAppBtn");
-  const deeplink = document.getElementById("hiddenDeeplink");
-  const landing = document.getElementById("landingContent");
-  const fallback = document.getElementById("fallbackContent");
+    function isIOS() {
+      return /iPad|iPhone|iPod/.test(navigator.userAgent);
+    }
 
-  function isInAppBrowser() {
-    const ua = navigator.userAgent || "";
-    return ua.includes("FBAN") || ua.includes("FBAV") || ua.includes("FB_IAB") || ua.includes("Instagram");
-  }
+    function isHuawei() {
+      var userAgent = navigator.userAgent;
+      if (/HuaweiBrowser|HarmonyOS/i.test(userAgent)) return true;
+      if (typeof window.hmsAvailable !== "undefined" && window.hmsAvailable === true) return true;
+      return false;
+    }
 
-  function isAndroid() {
-    return /Android/i.test(navigator.userAgent);
-  }
+    function isInAppBrowser() {
+      return /(FBAN|FBAV|Instagram|Line)/i.test(navigator.userAgent);
+    }
 
-  function isIOS() {
-    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  }
+    function openDeeplinkWithFallback() {
+      const appScheme = "otpmBank://";
+      const now = Date.now();
+      window.location = appScheme;
 
-  function openDeeplinkWithFallback() {
-    let fallbackTimer = setTimeout(() => {
+      setTimeout(() => {
+        if (Date.now() - now < 1600) {
+          showFallback();
+        }
+      }, 1200);
+    }
+
+    function showFallback() {
       landing.style.display = "none";
       fallback.style.display = "block";
-    }, 2000);
 
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) {
-        clearTimeout(fallbackTimer);
+      const appLink = document.getElementById('app-link');
+      if (isIOS()) {
+        appLink.href = "https://apps.apple.com/us/app/otp-m-bank/id803935073";
+      } else if (isHuawei()) {
+        appLink.href = "https://appgallery.huawei.com/#/app/C102787361";
+      } else {
+        appLink.href = "https://play.google.com/store/apps/details?id=eu.newfrontier.iBanking.mobile.SOG.Retail";
       }
-    });
+    }
 
-    deeplink.click();
-  }
-
-  if (isIOS()) {
-    if (isInAppBrowser()) {
-      landing.style.display = "block";
-      btn.addEventListener("click", openDeeplinkWithFallback);
-    } else {
-      openDeeplinkWithFallback();
-    }  
-  } else { 
-    openDeeplinkWithFallback();
-  }
-
-  /*
-  if (isAndroid()) {
-    openDeeplinkWithFallback();
-  } else if (isIOS()) {
-    if (isInAppBrowser()) {
-      landing.style.display = "block";
-      btn.addEventListener("click", openDeeplinkWithFallback);
+    if (isIOS()) {
+      if (isInAppBrowser()) {
+        landing.style.display = "block";
+        btn.addEventListener("click", openDeeplinkWithFallback);
+      } else {
+        openDeeplinkWithFallback();
+      }
     } else {
       openDeeplinkWithFallback();
     }
-  } else {
-    landing.style.display = "block";
-    btn.style.display = "none"; 
-    fallback.style.display = "block";
-  }
-  */ 
-</script>
+  </script>
 </body>
 </html>
-
