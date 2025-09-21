@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <title>OTP mBank Deeplink</title>
   <style>
     body {
       padding: 0;
       margin: 0 10%;
       font-family: 'Source-Sans-Pro', sans-serif;
-      height: calc(100vh - 30px);
+      height: 100vh;
       position: relative;
-      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("https://i.imgur.com/sRnDCOs.jpeg") center no-repeat;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                  url("https://i.imgur.com/sRnDCOs.jpeg") center no-repeat;
+      background-size: cover;
       overflow: hidden;
     }
 
@@ -27,8 +29,8 @@
       width: 45%;
     }
 
-    /* LANDING placeholder (kasnije ćemo srediti) */
-    #landing {
+    /* LANDING */
+    #landingContent {
       display: none;
       text-align: center;
       padding: 50px 20px;
@@ -36,13 +38,14 @@
     }
 
     /* FALLBACK */
-    #fallback {
+    #fallbackContent {
       display: none;
+      text-align: center;
     }
 
     .blur-wrapper {
       text-align: center;
-      background-color: rgba(0, 0, 0, .4);
+      background-color: rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(5px);
       padding: 20px 25px;
       border-radius: 20px;
@@ -50,6 +53,9 @@
       transform: translate(0, -50%);
       top: 50%;
       position: absolute;
+      width: 90%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
     .blur-wrapper-top {
@@ -68,11 +74,11 @@
     .app-link {
       display: flex;
       align-items: center;
-      margin: 20px 0;
+      justify-content: center;
+      margin: 20px auto;
       flex-direction: column;
-      position: absolute;
-      bottom: 90px;
       width: 85%;
+      max-width: 400px;
       padding: 14px 25px;
       background-color: #52AE30;
       border-radius: 25px;
@@ -82,53 +88,59 @@
       cursor: pointer;
       text-decoration: none !important;
     }
+
+    .app-link:hover {
+      background-color: #2A7F00;
+    }
+
+    .app-links {
+      margin-top: 20px;
+    }
   </style>
 </head>
-
 <body>
   <div class="header-wrapper">
-    <img class="otp-promo-img" src="https://i.imgur.com/Vq45WRe.png">
+    <img class="otp-promo-img" src="https://i.imgur.com/Vq45WRe.png" alt="OTP promo">
   </div>
 
   <!-- LANDING -->
-  <div id="landingContent" style="display:none;">
+  <div id="landingContent">
     <div class="blur-wrapper">
       <p class="blur-wrapper-top">Samo još jedan klik!</p>
       <p class="blur-wrapper-bottom">
-        Klikni na dugme Pokreni aplikaciju i automatski ćemo otvoriti OTP m-bank aplikaciju. <br>
+        Klikni na dugme "Pokreni aplikaciju" i automatski ćemo otvoriti OTP m-bank aplikaciju. <br>
         Molimo za malo strpljenja dok se izvrši preusmeravanje.
       </p>
     </div>
     <div class="app-links">
-      <a id="openAppBtn" target="_blank" class="app-link">Pokreni aplikaciju</a>
+      <a id="openAppBtn" class="app-link">Pokreni aplikaciju</a>
     </div>
   </div>
-    
+
   <!-- FALLBACK -->
-  <div id="fallback">
+  <div id="fallbackContent">
     <div class="blur-wrapper">
       <p class="blur-wrapper-top">Hmmm...</p>
       <p class="blur-wrapper-bottom">
         Izgleda da nemate instaliranu mBank aplikaciju OTP banke. Preuzmite je sada i iskoristite sve pogodnosti digitalnog bankarstva.
       </p>
     </div>
-    <a class="app-link" id="app-link" href="#">Preuzmi ovde</a>
+    <a id="app-link" class="app-link" href="#">Preuzmi ovde</a>
   </div>
 
   <script>
-    const landing = document.getElementById("landing");
-    const fallback = document.getElementById("fallback");
-    const btn = document.getElementById("app-link");
+    const landing = document.getElementById("landingContent");
+    const fallback = document.getElementById("fallbackContent");
+    const landingBtn = document.getElementById("openAppBtn");
+    const fallbackBtn = document.getElementById("app-link");
 
     function isIOS() {
       return /iPad|iPhone|iPod/.test(navigator.userAgent);
     }
 
     function isHuawei() {
-      var userAgent = navigator.userAgent;
-      if (/HuaweiBrowser|HarmonyOS/i.test(userAgent)) return true;
-      if (typeof window.hmsAvailable !== "undefined" && window.hmsAvailable === true) return true;
-      return false;
+      const ua = navigator.userAgent;
+      return /HuaweiBrowser|HarmonyOS/i.test(ua) || (typeof window.hmsAvailable !== "undefined" && window.hmsAvailable === true);
     }
 
     function isInAppBrowser() {
@@ -152,20 +164,20 @@
       landing.style.display = "none";
       fallback.style.display = "block";
 
-      const appLink = document.getElementById('app-link');
       if (isIOS()) {
-        appLink.href = "https://apps.apple.com/us/app/otp-m-bank/id803935073";
+        fallbackBtn.href = "https://apps.apple.com/us/app/otp-m-bank/id803935073";
       } else if (isHuawei()) {
-        appLink.href = "https://appgallery.huawei.com/#/app/C102787361";
+        fallbackBtn.href = "https://appgallery.huawei.com/#/app/C102787361";
       } else {
-        appLink.href = "https://play.google.com/store/apps/details?id=eu.newfrontier.iBanking.mobile.SOG.Retail";
+        fallbackBtn.href = "https://play.google.com/store/apps/details?id=eu.newfrontier.iBanking.mobile.SOG.Retail";
       }
     }
 
+    // Ponašanje po platformi
     if (isIOS()) {
       if (isInAppBrowser()) {
         landing.style.display = "block";
-        btn.addEventListener("click", openDeeplinkWithFallback);
+        landingBtn.addEventListener("click", openDeeplinkWithFallback);
       } else {
         openDeeplinkWithFallback();
       }
@@ -175,5 +187,3 @@
   </script>
 </body>
 </html>
-
-
