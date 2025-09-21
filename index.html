@@ -78,18 +78,21 @@
 </head>
 
 <body>
+<!-- izmena landing stranice -->
 <div id="landingContent" style="display:none;">
   <p>Neki tekst.......</p>
   <div class="app-links">
     <a id="openAppBtn" target="_blank" class="app-link">Otvori aplikaciju</a>
   </div>
 </div>
-
+    
+<!-- izmena fallback stranice -->
 <div id="fallbackContent" style="display:none; text-align:center;">
   <p>Niste instalirali aplikaciju?</p>
   <a href="https://www.otpbanka.rs/mobileTarget" class="app-link">Nastavi na web verziju</a>
 </div>
 
+<!-- IZMENA DEEPLINKA -->
 <a id="hiddenDeeplink" 
    href="https://ebank.otpbanka.rs/mobileTarget/?data=ewogICJUYXJnZXQiOiJEQi5tS2VzIgp9&utm_source=Facebook&utm_medium=Traffic&utm_campaign=Deeplink_mCash_Online_sales_202508&utm_content=120232029472500056%2F%2FOS_FB_LG_customer-list_kes-kredit_092025-01163&utm_term=120232029472510056%2F%2FInstagram_Feed%2F%2F7.5%25EKS_Mbank&utm_id=&crmc=4c3dea17-5372-733a-b283-685cf056bdc3&crm_campaign=CCC_IND_ONLINE_SALES_MBANK_DEEPLINK_RTDE_SLS_062025_P&fbclid=PAb21jcAMswAdleHRuA2FlbQEwAGFkaWQBqyZlQyT9GAGn4GZe1fiqsLyzQofJBEKJ8lgiNETSdLpd_O9V63kGW54yr_clXnwGQ_04KtE_aem_mEnwGhWOMGB5752cRx_zlg">
 </a>
@@ -128,27 +131,34 @@
     deeplink.click();
   }
 
-  // --- Logika ---
-  if (isAndroid()) {
-    // Android uvek odmah pokuša app
-    openDeeplinkWithFallback();
-
-  } else if (isIOS()) {
+  if (isIOS()) {
     if (isInAppBrowser()) {
-      // iOS + in-app browser → landing sa dugmetom
       landing.style.display = "block";
       btn.addEventListener("click", openDeeplinkWithFallback);
     } else {
-      // iOS + Safari (ili drugi browser) → odmah probaj app
+      openDeeplinkWithFallback();
+    }  
+  } else { 
+    openDeeplinkWithFallback();
+  }
+
+  /*
+  if (isAndroid()) {
+    openDeeplinkWithFallback();
+  } else if (isIOS()) {
+    if (isInAppBrowser()) {
+      landing.style.display = "block";
+      btn.addEventListener("click", openDeeplinkWithFallback);
+    } else {
       openDeeplinkWithFallback();
     }
-
   } else {
-    // fallback za svaki slučaj (desktop npr.)
     landing.style.display = "block";
     btn.style.display = "none"; 
     fallback.style.display = "block";
   }
+  */ 
 </script>
 </body>
 </html>
+
