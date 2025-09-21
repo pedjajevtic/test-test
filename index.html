@@ -97,8 +97,7 @@
 <script>
   const btn = document.getElementById("openAppBtn");
   const deeplink = document.getElementById("hiddenDeeplink");
-  const landing = document.getElementById("landingContent");
-  const fallback = document.getElementById("fallbackContent");
+  const fallbackUrl = "https://www.otpbanka.rs/mobileTarget";
 
   function isInAppBrowser() {
     const ua = navigator.userAgent || "";
@@ -107,28 +106,34 @@
 
   function tryOpenDeeplink() {
     let fallbackTimer = setTimeout(() => {
-      landing.style.display = "none";
-      fallback.style.display = "block";
+      window.location.href = fallbackUrl;
     }, 2000);
 
+    // Ako korisnik ode iz stranice (jer se app otvorila), stopiraj fallback
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         clearTimeout(fallbackTimer);
       }
     });
 
+    // iOS voli pravi user-gesture (click), pa simulacija klik ne prolazi uvek
+    // Zato je bolje ovde pozvati .click() SAMO iz handlera dugmeta
     deeplink.click();
   }
 
   if (isInAppBrowser()) {
+    // Ako je u in-app browseru → prikaži dugme
     btn.style.display = "inline-block";
     btn.addEventListener("click", tryOpenDeeplink);
   } else {
+    // Ako NIJE u in-app browser → odmah probaj
     tryOpenDeeplink();
   }
 </script>
+
 </body>
 </html>
+
 
 
 
