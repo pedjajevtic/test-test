@@ -151,14 +151,27 @@
 
     function openDeeplinkWithFallback() {
       const appScheme = "https://ebank.otpbanka.rs/mobileTarget/?data=ewogICJUYXJnZXQiOiJEQi5tS2VzIgp9&utm_source=Facebook&utm_medium=Traffic&utm_campaign=Deeplink_mCash_Online_sales_202508&utm_content=120232029472500056%2F%2FOS_FB_LG_customer-list_kes-kredit_092025-01163&utm_term=120232029472510056%2F%2FInstagram_Feed%2F%2F7.5%25EKS_Mbank&utm_id=&crmc=4c3dea17-5372-733a-b283-685cf056bdc3&crm_campaign=CCC_IND_ONLINE_SALES_MBANK_DEEPLINK_RTDE_SLS_062025_P&fbclid=PAb21jcAMswAdleHRuA2FlbQEwAGFkaWQBqyZlQyT9GAGn4GZe1fiqsLyzQofJBEKJ8lgiNETSdLpd_O9V63kGW54yr_clXnwGQ_04KtE_aem_mEnwGhWOMGB5752cRx_zlg";
+      const androidIntent = "intent://ebank.otpbanka.rs/mobileTarget/?data=ewogICJUYXJnZXQiOiJEQi5tS2VzIgp9&utm_source=Facebook&utm_medium=Traffic&utm_campaign=Deeplink_mCash_Online_sales_202508&utm_content=120232029472500056%2F%2FOS_FB_LG_customer-list_kes-kredit_092025-01163&utm_term=120232029472510056%2F%2FInstagram_Feed%2F%2F7.5%25EKS_Mbank&utm_id=&crmc=4c3dea17-5372-733a-b283-685cf056bdc3&crm_campaign=CCC_IND_ONLINE_SALES_MBANK_DEEPLINK_RTDE_SLS_062025_P&fbclid=PAb21jcAMswAdleHRuA2FlbQEwAGFkaWQBqyZlQyT9GAGn4GZe1fiqsLyzQofJBEKJ8lgiNETSdLpd_O9V63kGW54yr_clXnwGQ_04KtE_aem_mEnwGhWOMGB5752cRx_zlg#Intent;scheme=https;package=eu.newfrontier.iBanking.mobile.SOG.Retail;S.browser_fallback_url=https%3A%2F%2Fwww.otpbanka.rs%2FmobileTarget;end";
       const now = Date.now();
-      window.location = appScheme;
+      //window.location = appScheme;
 
-      setTimeout(() => {
+      /*setTimeout(() => {
         if (Date.now() - now < 1600) {
           showFallback();
         }
-      }, 1200);
+      }, 1200);*/
+
+      if (isIOS()) {
+         window.location = appScheme;
+         
+         setTimeout(() => {
+           if (Date.now() - now < 1600) {
+             showFallback();
+           }
+         }, 1200);
+      } else {
+         window.location = androidIntent;
+      }
     }
 
     function showFallback() {
@@ -188,6 +201,7 @@
   </script>
 </body>
 </html>
+
 
 
 
