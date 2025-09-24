@@ -188,19 +188,20 @@
     }
 
     // Ponašanje po platformi
-    if (isIOS()) {
-      if (isInAppBrowser()) {
+    //if (isIOS()) {
+      //if (isInAppBrowser()) {
         landing.style.display = "block";
         landingBtn.addEventListener("click", openDeeplinkWithFallback);
-      } else {
-        openDeeplinkWithFallback();
-      }
-    } else {
-      openDeeplinkWithFallback();
-    }
+      //} else {
+        //openDeeplinkWithFallback();
+      //}
+    //} else {
+      //openDeeplinkWithFallback();
+    //}
   </script>
 </body>
 </html>
+
 
 
 
